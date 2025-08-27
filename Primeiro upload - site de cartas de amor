@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amor Virtual - Suas Cartas de Amor</title>
+    <style>
+        :root {
+            --rosa-claro: #ffebee;
+            --rosa-escuro: #f48fb1;
+            --vermelho-romantico: #e91e63;
+            --roxo-suave: #ce93d8;
+            --cinza-claro: #f5f5f5;
+            --preto-suave: #424242;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--rosa-claro) 0%, #ffffff 100%);
+            color: var(--preto-suave);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--vermelho-romantico), var(--roxo-suave));
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .logo-container {
+            margin-bottom: 1.5rem;
+        }
+
+        .logo-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .hero-text {
+            font-size: 1.5rem;
+            color: var(--vermelho-romantico);
+            margin-bottom: 2rem;
+        }
+
+        .card-creation {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid var(--rosa-claro);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--vermelho-romantico);
+            font-weight: 600;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--rosa-claro);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--vermelho-romantico);
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        button {
+            background: linear-gradient(135deg, var(--vermelho-romantico), var(--roxo-suave));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-weight: 600;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(233, 30, 99, 0.3);
+        }
+
+        .cards-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .love-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid var(--rosa-claro);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .love-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .card-header {
+            border-bottom: 2px solid var(--rosa-claro);
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            color: var(--vermelho-romantico);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-date {
+            color: var(--preto-suave);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        .card-content {
+            line-height: 1.8;
+            color: var(--preto-suave);
+        }
+
+        .heart-icon {
+            color: var(--vermelho-romantico);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .gallery-title {
+            color: var(--vermelho-romantico);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background: var(--preto-suave);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .cards-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #confirmation {
+            background: var(--rosa-claro);
+            border: 2px solid var(--vermelho-romantico);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+            text-align: center;
+            color: var(--vermelho-romantico);
+            font-weight: 600;
+        }
+
+        .decoration-heart {
+            color: var(--vermelho-romantico);
+            font-size: 1.2rem;
+            margin: 0 0.2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dda5ada6-a743-4747-9f25-66ae76198bcf.png" alt="Coração romântico estilizado com bordas suaves em tons de rosa e vermelho, fundo desfocado com efeito de brilho suave" class="logo-image" onerror="this.style.display='none'">
+        </div>
+        <h1>Amor Virtual</h1>
+        <p class="subtitle">Expressando sentimentos através de cartas digitais</p>
+    </header>
+
+    <div class="container">
+        <section class="hero-section">
+            <p class="hero-text">"O amor não se vê com os olhos, mas com o coração"</p>
+        </section>
+
+        <section class="card-creation">
+            <h2 style="color: var(--vermelho-romantico); margin-bottom: 2rem; text-align: center;">
+                <span class="decoration-heart">❤</span> Criar Nova Carta de Amor <span class="decoration-heart">❤</span>
+            </h2>
+            
+            <form id="loveLetterForm">
+                <div class="form-group">
+                    <label for="recipient">Para quem é esta carta?</label>
+                    <input type="text" id="recipient" placeholder="Nome da pessoa amada" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="title">Título da Carta</label>
+                    <input type="text" id="title" placeholder="Um título especial para sua carta..." required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Sua Mensagem de Amor</label>
+                    <textarea id="message" placeholder="Escreva aqui todas as palavras que seu coração deseja expressar..." required></textarea>
+                </div>
+                
+                <button type="submit" style="display: block; margin: 0 auto;">
+                    <span class="decoration-heart">✉</span> Enviar Carta de Amor <span class="decoration-heart">✉</span>
+                </button>
+            </form>
+
+            <div id="confirmation" class="hidden">
+                Sua carta de amor foi criada com sucesso! ❤
+            </div>
+        </section>
+
+        <section class="gallery-header">
+            <h2 class="gallery-title">Cartas de Amor Inspiradoras</h2>
+            <p>Algumas ideias para inspirar seu coração</p>
+        </section>
+
+        <div class="cards-gallery">
+            <!-- Carta de Amor 1 -->
+            <div class="love-card">
+                <div class="card-header">
+                    <h3 class="card-title">Para o Amor da Minha Vida</h3>
+                    <p class="card-date">14 de Fevereiro, 2024</p>
+                </div>
+                <div class="card-content">
+                    <p>"Cada momento ao seu lado é um tesouro que guardo no meu coração. Seu sorriso ilumina meus dias e seu amor preenche minha alma..."</p>
+                </div>
+            </div>
+
+            <!-- Carta de Amor 2 -->
+            <div class="love-card">
+                <div class="card-header">
+                    <h3 class="card-title">Meu Porto Seguro</h3>
+                    <p class="card-date">8 de Março, 2024</p>
+                </div>
+                <div class="card-content">
+                    <p>"No oceano da vida, você é meu porto seguro. Sua presença acalma minhas tempestades e sua luz guia meus caminhos..."</p>
+                </div>
+            </div>
+
+            <!-- Carta de Amor 3 -->
+            <div class="love-card">
+                <div class="card-header">
+                    <h3 class="card-title">Eternamente Seu</h3>
+                    <p class="card-date">20 de Abril, 2024</p>
+                </div>
+                <div class="card-content">
+                    <p>"O tempo pode passar, as estações podem mudar, mas meu amor por você permanecerá eterno como as estrelas no céu..."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 Amor Virtual - Todos os corações foram feitos para amar</p>
+        <p>Compartilhe amor, espalhe felicidade ❤</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('loveLetterForm');
+            const confirmation = document.getElementById('confirmation');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const recipient = document.getElementById('recipient').value;
+                const title = document.getElementById('title').value;
+                const message = document.getElementById('message').value;
+                
+                if (recipient && title && message) {
+                    // Simular envio da carta
+                    setTimeout(() => {
+                        confirmation.classList.remove('hidden');
+                        form.reset();
+                        
+                        // Esconder a confirmação após 3 segundos
+                        setTimeout(() => {
+                            confirmation.classList.add('hidden');
+                        }, 3000);
+                    }, 1000);
+                }
+            });
+
+            // Efeito de digitação nas cartas existentes
+            const loveCards = document.querySelectorAll('.love-card');
+            loveCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Efeito de coração pulsante no header
+            const logoImage = document.querySelector('.logo-image');
+            setInterval(() => {
+                logoImage.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    logoImage.style.transform = 'scale(1)';
+                }, 500);
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
